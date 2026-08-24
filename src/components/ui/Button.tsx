@@ -5,7 +5,8 @@ import type { LucideIcon } from 'lucide-react'
 type buttonProps = {
     title: string,
     icon?: LucideIcon,
-    color: ButtonColor
+    color: ButtonColor,
+    className?: string
 }
 
 const buttonColors: Record<ButtonColor, string> = {
@@ -15,9 +16,9 @@ const buttonColors: Record<ButtonColor, string> = {
     muted: "bg-muted text-muted-foreground hover:bg-[color-mix(in_srgb,var(--muted)_90%,black)]",
 };
 
-export default function Button({ title, color, icon: Icon }: buttonProps) {
+export default function Button({ title, color, icon: Icon, className }: buttonProps) {
     return (
-        <button className={cn('flex p-2 gap-2 rounded-sm transition-colors text-sm', buttonColors[color])}>
+        <button className={cn('flex p-2 gap-2 rounded-sm transition-colors text-sm,', className, buttonColors[color])}>
             {Icon && <Icon size={20}></Icon>}
             {title}
         </button>
