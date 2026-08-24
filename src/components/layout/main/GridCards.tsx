@@ -1,3 +1,5 @@
+import Card from "./Card";
+
 export default function GridCards() {
     const products = [
         {
@@ -66,9 +68,9 @@ export default function GridCards() {
     ];
 
     return (
-        <div className="grid grid-cols-3">
+        <div className="mx-auto grid grid-cols-3 max-w-300 gap-10 mt-20">
             {products.map((product) => (
-                <p key={product.id}>{product.name}</p>
+               <Card image={product.image} name={product.name} description={product.description} price={product.price}></Card>
             ))}
         </div>
     )
