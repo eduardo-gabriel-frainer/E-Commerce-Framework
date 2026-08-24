@@ -1,5 +1,5 @@
 import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
+import Header from "@/components/layout/header/Header";
 import GridCards from "@/components/layout/main/GridCards";
 import ProductPresentation from "@/components/layout/main/ProductPresentation";
 
