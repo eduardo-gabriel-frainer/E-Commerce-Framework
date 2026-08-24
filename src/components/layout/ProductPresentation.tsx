@@ -10,7 +10,7 @@ export default function ProductPresentation() {
     const backgroundPresentation = 'bg-primary'
 
     return (
-        <div className={cn("min-h-screen px-6 py-12 sm:px-10 lg:px-16", backgroundPresentation)}>
+        <div className={cn(" px-6 py-40 sm:px-10 lg:px-16", backgroundPresentation)}>
             <div className="mx-auto flex max-w-7xl flex-col items-center gap-12 lg:flex-row lg:justify-between">
 
                 <div className="max-w-xl text-white">
@@ -26,14 +26,15 @@ export default function ProductPresentation() {
                         {description}
                     </p>
 
-                    <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                    <div className="mt-8 flex flex-col gap-4 sm:flex-row w-100">
                         <Button
                             title="Comprar agora"
                             color="accent"
+                            className="flex-1 py-3 px-5 font-bold text-sm"
                         />
 
                         <Button
-                            className="border"
+                            className="flex-1 border py-3 px-5 font-bold text-sm"
                             title="Ver coleção"
                             color="primary"
                         />

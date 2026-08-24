@@ -18,7 +18,7 @@ const buttonColors: Record<ButtonColor, string> = {
 
 export default function Button({ title, color, icon: Icon, className }: buttonProps) {
     return (
-        <button className={cn('flex p-2 gap-2 rounded-sm transition-colors text-sm,', className, buttonColors[color])}>
+        <button className={cn('flex items-center justify-center p-2 gap-2 rounded-sm transition-colors text-sm,', className, buttonColors[color])}>
             {Icon && <Icon size={20}></Icon>}
             {title}
         </button>
