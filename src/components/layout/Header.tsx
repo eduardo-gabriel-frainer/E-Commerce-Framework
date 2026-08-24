@@ -8,7 +8,7 @@ export default function Header() {
         <div className="mx-auto flex max-w-7xl justify-between px-6 py-4 sm:px-10 lg:px-1">
             <div className="flex gap-2 items-center">
                 <img className="max-h-10" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJdAo2rZzw08S0RV5VevGLR-PRuehXvErkHmJBVhWnrw&s=10'></img>
-                <h2>Casa e Madeira</h2>
+                <h2>Casa & Madeira</h2>
             </div>
             <div className="flex items-center">
                 <Nav>
