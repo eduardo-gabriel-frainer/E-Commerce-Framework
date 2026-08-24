@@ -1,12 +1,13 @@
-import Header from "@/components/layout/Header";
-import ProductPresentation from "@/components/layout/ProductPresentation";
-import Image from "next/image";
+import Header from "@/components/layout/header/Header";
+import ProductPresentation from "@/components/layout/main/ProductPresentation";
+import GridCards from "@/components/layout/main/GridCards";
 
 export default function Home() {
   return (
     <div>
       <Header></Header>
       <ProductPresentation></ProductPresentation>
+      <GridCards></GridCards>
     </div>
   );
 }

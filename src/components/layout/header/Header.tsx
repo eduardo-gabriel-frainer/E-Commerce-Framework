@@ -1,4 +1,4 @@
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 import { ShoppingCart, User } from "lucide-react"
 import Nav from "./Nav";
 import ItemNav from "./ItemNav";

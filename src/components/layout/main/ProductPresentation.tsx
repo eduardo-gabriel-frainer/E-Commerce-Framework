@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils/cn"
-import Button from "../ui/Button"
+import Button from "../../ui/Button"
 
 export default function ProductPresentation() {
     const label = 'ARTESANATO EM MADEIRA'
@@ -10,7 +10,7 @@ export default function ProductPresentation() {
     const backgroundPresentation = 'bg-primary'
 
     return (
-        <div className={cn(" px-6 py-40 sm:px-10 lg:px-16", backgroundPresentation)}>
+        <div className={cn(" px-6 py-10 md:py-40 sm:px-10 lg:px-16", backgroundPresentation)}>
             <div className="mx-auto flex max-w-7xl flex-col items-center gap-12 lg:flex-row lg:justify-between">
 
                 <div className="max-w-xl text-white">
