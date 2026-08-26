@@ -13,7 +13,7 @@ export default function Header() {
             <div className="flex items-center">
                 <Nav>
                     <ItemNav href="/" title="Início"></ItemNav>
-                    <ItemNav href="/" title="Produtos"></ItemNav>
+                    <ItemNav href="#produtos" title="Produtos"></ItemNav>
                     <ItemNav href="/" title="Sobre"></ItemNav>
                     <ItemNav href="/" title="Contato"></ItemNav>
                 </Nav>

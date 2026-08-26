@@ -4,8 +4,6 @@ type CardProps = {
     oldPrice?: number;
     description: string;
     image: string;
-    rating?: number;
-    reviews?: number;
 };
 
 export default function Card({
@@ -14,8 +12,6 @@ export default function Card({
     oldPrice,
     description,
     image,
-    rating = 4.9,
-    reviews = 143,
 }: CardProps) {
     return (
         <div className="w-full overflow-hidden rounded-lg border border-stone-200 bg-white">
@@ -29,41 +25,25 @@ export default function Card({
                 />
             </div>
 
-            {/* Informações */}
             <div className="p-3.5">
 
 
-                {/* Nome */}
                 <h3 className="font-serif text-[17px] font-semibold leading-tight text-stone-900">
                     {name}
                 </h3>
 
-                {/* Descrição */}
                 <p className="mt-2 text-[14px] leading-5 text-stone-600">
                     {description}
                 </p>
 
-                {/* Avaliação */}
-                <div className="mt-2 flex items-center gap-1">
-                    <div className="flex text-[15px] text-orange-600">
-                        ★★★★★
-                    </div>
 
-                    <span className="ml-1 text-xs text-stone-500">
-                        {rating.toFixed(1)} ({reviews})
-                    </span>
-                </div>
 
-                {/* Preço + botão */}
                 <div className="mt-4 flex items-end justify-between">
 
                     <div>
-                        {/* Preço atual */}
                         <p className="text-[18px] font-bold text-stone-900">
                             R$ {price.toFixed(2).replace(".", ",")}
                         </p>
-
-                        {/* Preço antigo */}
                         {oldPrice && (
                             <p className="text-[12px] text-stone-500 line-through">
                                 R$ {oldPrice.toFixed(2).replace(".", ",")}
@@ -71,7 +51,6 @@ export default function Card({
                         )}
                     </div>
 
-                    {/* Botão */}
                     <button
                         className="rounded-md bg-[#321d15] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#43271c]"
                     >

@@ -68,10 +68,25 @@ export default function GridCards() {
     ];
 
     return (
-        <div className="mx-auto grid grid-cols-3 max-w-300 gap-10 mt-20">
-            {products.map((product) => (
-               <Card image={product.image} name={product.name} description={product.description} price={product.price}></Card>
-            ))}
+        <div id="produtos">
+            <div className="mx-auto max-w-300">
+
+                <h3 className="mt-10 text-2xl font-bold sm:text-3xl lg:text-4xl">
+                    Produtos em destaque
+                </h3>
+
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 my-10">
+                    {products.map((product) => (
+                        <Card
+                            key={product.id}
+                            image={product.image}
+                            name={product.name}
+                            description={product.description}
+                            price={product.price}
+                        />
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
