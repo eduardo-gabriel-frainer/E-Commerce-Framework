@@ -6,11 +6,8 @@ import ProductPresentation from "@/components/layout/main/ProductPresentation";
 export default function Home() {
   return (
     <div>
-      <Header></Header>
       <ProductPresentation></ProductPresentation>
       <GridCards></GridCards>
-      <Footer></Footer>
-
     </div>
   );
 }

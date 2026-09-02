@@ -106,12 +106,16 @@ export default function Header() {
                         </>
                     )}
                 </div>
+                
+                <a href="/Cart">
+                    <Button
+                        title="Carrinho"
+                        color="primary"
+                        icon={ShoppingCart}
+                    />
+                </a>
 
-                <Button
-                    title="Carrinho"
-                    color="primary"
-                    icon={ShoppingCart}
-                />
+
             </div>
 
             {mobileMenu && (
