@@ -1,67 +1,97 @@
-import { cn } from "@/lib/utils/cn"
+"use client";
+
+import { usePathname } from "next/navigation";
+import { useStorefrontSettings } from "@/components/storefront/StorefrontProvider";
 
 export default function Footer() {
-    const storeName = "Casa & Madeira"
-    const logoIcon = "▲"
-    const description =
-        "Produtos artesanais de madeira feitos com cuidado e dedicação, direto para a sua casa."
+    const pathname = usePathname();
+    const settings = useStorefrontSettings();
 
-    const navLinks = [
-        { label: "Início", href: "#inicio" },
-        { label: "Produto", href: "#produto" },
-        { label: "Sobre", href: "#sobre" },
-        { label: "Contato", href: "#contato" },
-    ]
+    if (pathname.startsWith("/admin") || pathname.startsWith("/login")) return null;
 
-    const contactInfo = {
-        email: "contato@casamadeira.com.br",
-        phone: "(11) 98765-4321",
-        location: "São Paulo, SP – Brasil",
-    }
-
-    const currentYear = new Date().getFullYear()
-    const backgroundFooter = "bg-primary"
+    const currentYear = new Date().getFullYear();
+    const copyright = settings.copyright.replaceAll("{year}", String(currentYear));
+    const location = [settings.address, settings.city, settings.state].filter(Boolean).join(", ");
+    const socialLinks = [
+        { label: "Instagram", href: toSocialUrl(settings.instagram, "instagram") },
+        { label: "Facebook", href: toSocialUrl(settings.facebook, "facebook") },
+        { label: "WhatsApp", href: settings.whatsappLink },
+    ].filter((link) => link.href);
 
     return (
-        <footer className={cn("px-6 py-12 text-white/80 text-sm", backgroundFooter)}>
+        <footer id="contato" className="px-6 py-12 text-sm text-white/80" style={{ backgroundColor: settings.primaryColor }}>
             <div className="mx-auto max-w-7xl">
-                <div className="grid grid-cols-1 gap-8 pb-10 border-b border-white/10 md:grid-cols-4">
-
+                <div className="grid grid-cols-1 gap-8 border-b border-white/10 pb-10 md:grid-cols-4">
                     <div className="space-y-4 md:col-span-2">
                         <div className="flex items-center gap-2">
-                            <span className="flex items-center justify-center w-6 h-6 rounded bg-accent text-white text-xs font-bold">{logoIcon}</span>
-                            <span className="text-xl font-bold text-white">{storeName}</span>
+                            {settings.logo ? (
+                                <img src={settings.logo} alt="" className="max-h-10 max-w-32 object-contain" />
+                            ) : (
+                                <span className="flex h-6 w-6 items-center justify-center rounded text-xs font-bold text-white" style={{ backgroundColor: settings.accentColor }}>▲</span>
+                            )}
+                            <span className="text-xl font-bold text-white">{settings.storeName}</span>
                         </div>
-
-                        <p className="text-xs leading-relaxed text-white/70 max-w-sm">{description}</p>
+                        <p className="max-w-sm text-xs leading-relaxed text-white/70">{settings.footerMessage}</p>
                     </div>
 
-                    <div className="md:col-span-1 md:justify-self-end">
-                        <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-accent">Navegação</h3>
+                    <div className="md:justify-self-end">
+                        <h3 className="mb-4 text-xs font-bold uppercase tracking-wider" style={{ color: settings.accentColor }}>Navegação</h3>
                         <ul className="space-y-2 text-xs">
-                            {navLinks.map((item, index) => (
-                                <li key={index}>
-                                    <a href={item.href} className="hover:text-white transition-colors">{item.label}</a>
+                            <li><a href="#inicio" className="transition-colors hover:text-white">Início</a></li>
+                            <li><a href="#produtos" className="transition-colors hover:text-white">Produtos</a></li>
+                            <li><a href="#sobre" className="transition-colors hover:text-white">Sobre</a></li>
+                            {socialLinks.map((link) => (
+                                <li key={link.label}>
+                                    <a href={link.href} target="_blank" rel="noreferrer" className="transition-colors hover:text-white">{link.label}</a>
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    <div className="md:col-span-1 md:justify-self-end">
-                        <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-accent">Contato</h3>
+                    <div className="md:justify-self-end">
+                        <h3 className="mb-4 text-xs font-bold uppercase tracking-wider" style={{ color: settings.accentColor }}>Contato</h3>
                         <ul className="space-y-2 text-xs text-white/70">
-                            <li>{contactInfo.email}</li>
-                            <li>{contactInfo.phone}</li>
-                            <li>{contactInfo.location}</li>
+                            {settings.email && <li><a href={`mailto:${settings.email}`} className="hover:text-white">{settings.email}</a></li>}
+                            {settings.phone && <li><a href={`tel:${settings.phone}`} className="hover:text-white">{settings.phone}</a></li>}
+                            {settings.whatsapp && <li>{settings.whatsapp}</li>}
+                            {location && <li>{location}</li>}
                         </ul>
                     </div>
-
                 </div>
 
-                <div className="pt-6 flex flex-col items-center justify-between gap-4 text-xs text-white/50 sm:flex-row">
-                    <p>© {currentYear} {storeName}. Todos os direitos reservados.</p>
+                {settings.otherLinks.trim() && (
+                    <ul className="flex flex-wrap gap-x-5 gap-y-2 border-b border-white/10 py-5 text-xs">
+                        {settings.otherLinks.split(/\r?\n/).map((line) => line.trim()).filter(Boolean).map((link) => {
+                            const href = toSafeExternalUrl(link);
+                            return href ? <li key={link}><a href={href} target="_blank" rel="noreferrer" className="hover:text-white">{link}</a></li> : null;
+                        })}
+                    </ul>
+                )}
+
+                <div className="flex flex-col items-center justify-between gap-4 pt-6 text-xs text-white/50 sm:flex-row">
+                    <p>{copyright}</p>
                 </div>
             </div>
         </footer>
-    )
+    );
+}
+
+function toSocialUrl(value: string, network: "instagram" | "facebook") {
+    const trimmed = value.trim();
+    if (!trimmed) return "";
+    if (/^https?:\/\//i.test(trimmed)) return trimmed;
+
+    const username = trimmed.replace(/^@/, "");
+    return network === "instagram"
+        ? `https://www.instagram.com/${username}`
+        : `https://www.facebook.com/${username}`;
+}
+
+function toSafeExternalUrl(value: string) {
+    try {
+        const url = new URL(value);
+        return url.protocol === "http:" || url.protocol === "https:" ? url.href : "";
+    } catch {
+        return "";
+    }
 }

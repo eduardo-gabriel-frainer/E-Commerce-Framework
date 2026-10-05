@@ -16,30 +16,31 @@ import {
 import Nav from "./Nav";
 import ItemNav from "./ItemNav";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useStorefrontSettings } from "@/components/storefront/StorefrontProvider";
 
 export default function Header() {
+    const pathname = usePathname();
+    const settings = useStorefrontSettings();
     const [open, setOpen] = useState(false);
     const [mobileMenu, setMobileMenu] = useState(false);
+
+    if (pathname.startsWith("/admin") || pathname.startsWith("/login")) return null;
 
     return (
         <header className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-1">
 
             <div className="flex items-center gap-2">
-                <img
-                    className="max-h-10"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJdAo2rZzw08S0RV5VevGLR-PRuehXvErkHmJBVhWnrw&s=10"
-                    alt="Casa & Madeira"
-                />
-
-                <h2>Casa & Madeira</h2>
+                {settings.logo && <img className="max-h-10 max-w-32 object-contain" src={settings.logo} alt={settings.storeName} />}
+                <h2 className="font-semibold">{settings.storeName}</h2>
             </div>
 
             <div className="hidden items-center md:flex">
                 <Nav>
                     <ItemNav href="/" title="Início" />
                     <ItemNav href="#produtos" title="Produtos" />
-                    <ItemNav href="/" title="Sobre" />
-                    <ItemNav href="/" title="Contato" />
+                    <ItemNav href="#sobre" title="Sobre" />
+                    <ItemNav href="#contato" title="Contato" />
                 </Nav>
             </div>
 
@@ -91,7 +92,7 @@ export default function Header() {
 
                                     <button className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm font-semibold text-accent hover:bg-accent/10">
                                         <LayoutDashboard size={16} />
-                                        Gerenciar minha loja
+                                        <a href="/admin">Gerenciar minha loja</a>
                                     </button>
                                 </div>
 
@@ -141,7 +142,7 @@ export default function Header() {
                         <nav className="flex flex-col gap-1 p-4">
 
                             <a
-                                href="/"
+                                href="#sobre"
                                 onClick={() => setMobileMenu(false)}
                                 className="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-gray-100"
                             >
@@ -159,7 +160,7 @@ export default function Header() {
                             </a>
 
                             <a
-                                href="/"
+                                href="#contato"
                                 onClick={() => setMobileMenu(false)}
                                 className="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-gray-100"
                             >
