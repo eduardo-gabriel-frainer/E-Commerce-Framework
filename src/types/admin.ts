@@ -7,6 +7,7 @@ export type StoreConfig = {
   secondaryColor: string;
   accentColor: string;
   backgroundColor: string;
+  heroEyebrow: string;
   heroTitle: string;
   heroDescription: string;
   heroImage: string | null;

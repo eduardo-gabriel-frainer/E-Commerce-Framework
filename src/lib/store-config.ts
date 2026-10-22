@@ -7,6 +7,7 @@ export const defaultStoreConfig: StoreConfig = {
   secondaryColor: "#F0EDE8",
   accentColor: "#C4622A",
   backgroundColor: "#FAF8F4",
+  heroEyebrow: "Artesanato em madeira",
   heroTitle: "Produtos feitos para fazer parte da sua casa.",
   heroDescription: "Peças únicas, produzidas à mão com madeiras certificadas.",
   heroImage: null,

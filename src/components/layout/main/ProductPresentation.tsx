@@ -22,7 +22,7 @@ export default function ProductPresentation() {
             style={{ color: "var(--primary-foreground)" }}
           >
             <p className="font-bold" style={{ color: settings.accentColor }}>
-              ARTESANATO EM MADEIRA
+              {settings.heroEyebrow}
             </p>
             <h1 className="mt-3 text-4xl font-bold sm:text-5xl lg:text-6xl">
               {settings.heroTitle}

@@ -223,6 +223,13 @@ export default function AdminSettings({ section }: { section: AdminSection }) {
                 Conteúdo do banner principal
               </h3>
               <div className="mt-5 space-y-5">
+                <Field label="Texto de destaque" full>
+                  <Input
+                    value={config.heroEyebrow}
+                    onChange={(value) => update("heroEyebrow", value)}
+                    placeholder="Texto acima do título"
+                  />
+                </Field>
                 <Field
                   label="Título principal"
                   hint={`${config.heroTitle.length}/80 caracteres`}
@@ -261,7 +268,7 @@ export default function AdminSettings({ section }: { section: AdminSection }) {
                 className="text-xs font-semibold uppercase tracking-widest"
                 style={{ color: config.accentColor }}
               >
-                Artesanato em madeira
+                {config.heroEyebrow}
               </p>
               <h3
                 className="mt-3 max-w-lg font-display text-2xl font-semibold"
