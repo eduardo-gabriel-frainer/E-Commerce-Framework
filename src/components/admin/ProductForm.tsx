@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ManagedProduct } from "@/types/admin";
+import type { ManagedProduct } from "@/types/admin";
+import type { ManagedProductInput } from "@/lib/products";
 import { Field } from "./Field";
 import { ImageUpload } from "./ImageUpload";
 import { Input } from "./Input";
@@ -11,23 +12,33 @@ export default function ProductForm({
   product,
   onCancel,
   onSave,
+  saving,
+  errorMessage,
 }: {
   product: ManagedProduct | null;
   onCancel: () => void;
-  onSave: (product: ManagedProduct) => void;
+  onSave: (product: ManagedProductInput) => Promise<void>;
+  saving: boolean;
+  errorMessage: string;
 }) {
-  const [form, setForm] = useState<ManagedProduct>(
-    product ?? {
-      id: Date.now(),
+  const [form, setForm] = useState<ManagedProductInput>(
+    product
+      ? {
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+        }
+      : {
       name: "",
       description: "",
       price: 0,
       image: null,
-    },
+        },
   );
-  const update = <K extends keyof ManagedProduct>(
+  const update = <K extends keyof ManagedProductInput>(
     key: K,
-    value: ManagedProduct[K],
+    value: ManagedProductInput[K],
   ) => setForm((current) => ({ ...current, [key]: value }));
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-card">
@@ -46,13 +57,18 @@ export default function ProductForm({
         </div>
         <button
           type="button"
-          disabled={!form.name.trim()}
+          disabled={!form.name.trim() || saving}
           onClick={() => onSave(form)}
           className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-40"
         >
-          Salvar produto
+          {saving ? "Salvando..." : "Salvar produto"}
         </button>
       </div>
+      {errorMessage && (
+        <p role="alert" className="px-6 pt-4 text-sm text-red-700">
+          {errorMessage}
+        </p>
+      )}
       <div className="grid gap-8 p-6 lg:grid-cols-2">
         <div className="space-y-5">
           <Field label="Título do produto" hint="Nome exibido na loja.">
@@ -92,6 +108,7 @@ export default function ProductForm({
       <div className="flex justify-end gap-3 border-t border-border px-6 py-5">
         <button
           type="button"
+          disabled={saving}
           onClick={onCancel}
           className="rounded-md border border-border px-4 py-2 text-sm font-semibold"
         >
@@ -99,11 +116,11 @@ export default function ProductForm({
         </button>
         <button
           type="button"
-          disabled={!form.name.trim()}
+          disabled={!form.name.trim() || saving}
           onClick={() => onSave(form)}
           className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground disabled:opacity-40"
         >
-          Salvar produto
+          {saving ? "Salvando..." : "Salvar produto"}
         </button>
       </div>
     </div>
