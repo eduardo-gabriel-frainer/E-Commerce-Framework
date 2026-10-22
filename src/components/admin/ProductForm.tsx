@@ -21,6 +21,7 @@ export default function ProductForm({
   saving: boolean;
   errorMessage: string;
 }) {
+
   const [form, setForm] = useState<ManagedProductInput>(
     product
       ? {
@@ -36,6 +37,7 @@ export default function ProductForm({
       image: null,
         },
   );
+  const botaoDisable = !form.name.trim() || !form.description.trim() || !form?.image || !form?.price;
   const update = <K extends keyof ManagedProductInput>(
     key: K,
     value: ManagedProductInput[K],
@@ -55,14 +57,6 @@ export default function ProductForm({
             {product ? "Editar produto" : "Novo produto"}
           </h2>
         </div>
-        <button
-          type="button"
-          disabled={!form.name.trim() || saving}
-          onClick={() => onSave(form)}
-          className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-40"
-        >
-          {saving ? "Salvando..." : "Salvar produto"}
-        </button>
       </div>
       {errorMessage && (
         <p role="alert" className="px-6 pt-4 text-sm text-red-700">
@@ -116,7 +110,7 @@ export default function ProductForm({
         </button>
         <button
           type="button"
-          disabled={!form.name.trim() || saving}
+          disabled={botaoDisable || saving}
           onClick={() => onSave(form)}
           className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground disabled:opacity-40"
         >
