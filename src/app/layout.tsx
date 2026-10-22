@@ -36,7 +36,9 @@ function getReadableTextColor(color: string) {
   const channels = match[1].match(/.{2}/g);
   if (!channels) return "#FFFFFF";
 
-  const [red, green, blue] = channels.map((channel) => parseInt(channel, 16) / 255);
+  const [red, green, blue] = channels.map(
+    (channel) => parseInt(channel, 16) / 255,
+  );
   const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
   return luminance > 0.62 ? "#1A1208" : "#FFFFFF";
 }
