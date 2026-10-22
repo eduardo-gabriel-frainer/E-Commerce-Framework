@@ -8,7 +8,11 @@ import {
   loadStoreSettings,
   saveStoreSettings,
 } from "@/lib/store-settings";
-import { ColorField, Field, ImageUpload, Input, Textarea } from "./AdminField";
+import { ColorField } from "./ColorField";
+import { Field } from "./Field";
+import { ImageUpload } from "./ImageUpload";
+import { Input } from "./Input";
+import { Textarea } from "./Textarea";
 
 const sections: { id: AdminSection; label: string }[] = [
   { id: "identity", label: "Identidade da loja" },
