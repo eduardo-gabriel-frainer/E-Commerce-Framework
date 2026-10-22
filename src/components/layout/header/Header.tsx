@@ -99,7 +99,7 @@ export default function Header() {
                                 <div className="border-t border-amber-900 py-1">
                                     <button className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm text-gray-500 hover:bg-gray-100 hover:text-black">
                                         <LogOut size={16} />
-                                        Sair
+                                        <a href="/login">Sair</a>
                                     </button>
                                 </div>
 
