@@ -77,13 +77,22 @@ export default function AdminDashboard() {
     };
   }, []);
 
-  if (access === "checking") {
-    return (
-      <main className="mx-auto flex min-h-screen max-w-7xl items-center px-6">
-        <p role="status">Verificando acesso...</p>
-      </main>
-    );
-  }
+if (access === "checking") {
+  return (
+    <main className="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-4 px-6">
+      <div
+        role="status"
+        aria-label="Verificando acesso"
+        className="h-10 w-10 animate-spin rounded-full border-4 border-secondary border-t-primary"
+      />
+
+      <p className="text-sm text-muted-foreground">
+        Verificando acesso...
+      </p>
+    </main>
+  );
+}
+
   if (access === "signed-out") {
     return (
       <main className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center gap-4 px-6 text-center">
