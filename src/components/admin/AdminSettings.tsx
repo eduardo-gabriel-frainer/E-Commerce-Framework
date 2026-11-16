@@ -343,6 +343,9 @@ export default function AdminSettings({ section }: { section: AdminSection }) {
                     onChange={(event) => update("state", event.target.value)}
                     className="w-full rounded-md border border-border bg-card px-3 py-2.5 text-sm focus:border-ring focus:outline-none"
                   >
+                    <option value="UF">
+                      UF
+                    </option>
                     {states.map((state) => (
                       <option key={state}>{state}</option>
                     ))}
@@ -362,14 +365,14 @@ export default function AdminSettings({ section }: { section: AdminSection }) {
                 <Input
                   value={config.instagram}
                   onChange={(value) => update("instagram", value)}
-                  placeholder="casamadeira"
+                  placeholder="Seu usuário do Instagram"
                 />
               </Field>
               <Field label="Facebook">
                 <Input
                   value={config.facebook}
                   onChange={(value) => update("facebook", value)}
-                  placeholder="casamadeira"
+                  placeholder="Sua página do Facebook"
                 />
               </Field>
               <Field label="Link do WhatsApp">

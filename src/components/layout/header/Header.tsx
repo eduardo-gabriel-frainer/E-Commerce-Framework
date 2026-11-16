@@ -1,6 +1,5 @@
 "use client";
 
-import Button from "../../ui/Button";
 import {
   ShoppingCart,
   User,
@@ -18,10 +17,12 @@ import ItemNav from "./ItemNav";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useStorefrontSettings } from "@/components/storefront/StorefrontProvider";
+import { useCart } from "@/components/storefront/CartProvider";
 
 export default function Header() {
   const pathname = usePathname();
   const settings = useStorefrontSettings();
+  const { itemCount } = useCart();
   const [open, setOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -103,8 +104,20 @@ export default function Header() {
           )}
         </div>
 
-        <a href="/Cart">
-          <Button title="Carrinho" color="primary" icon={ShoppingCart} />
+        <a
+          href="/Cart"
+          className="relative flex items-center gap-2 rounded-sm bg-primary p-2 text-sm text-primary-foreground transition-colors hover:bg-[color-mix(in_srgb,var(--primary)_90%,white)]"
+        >
+          <ShoppingCart size={20} aria-hidden="true" />
+          <span>Carrinho</span>
+          {itemCount > 0 && (
+            <span
+              aria-label={`${itemCount} ${itemCount === 1 ? "item" : "itens"} no carrinho`}
+              className="flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-xs font-bold text-accent-foreground"
+            >
+              {itemCount > 99 ? "99+" : itemCount}
+            </span>
+          )}
         </a>
       </div>
 

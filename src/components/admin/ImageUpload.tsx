@@ -57,7 +57,8 @@ export function ImageUpload({
           className={`flex w-full flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed border-border text-muted-foreground transition-colors hover:border-ring hover:text-foreground ${square ? "h-32 max-w-xs" : "h-36"}`}
         >
           <ImagePlus size={24} />
-          <span className="text-sm">Clique para enviar imagem</span>
+          <span className="text-sm">Sua imagem aqui</span>
+          <span className="text-xs">Clique para enviar</span>
           <span className="text-xs">PNG, JPG ou SVG até 5 MB</span>
         </button>
       )}

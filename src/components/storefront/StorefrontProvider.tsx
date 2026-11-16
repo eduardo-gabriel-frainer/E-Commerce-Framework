@@ -4,6 +4,7 @@ import { createContext, ReactNode, useContext } from "react";
 import type { StoreConfig } from "@/types/admin";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/header/Header";
+import { CartProvider } from "./CartProvider";
 
 const StorefrontSettingsContext = createContext<StoreConfig | null>(null);
 
@@ -16,9 +17,11 @@ export function StorefrontProvider({
 }) {
   return (
     <StorefrontSettingsContext.Provider value={settings}>
-      <Header />
-      {children}
-      <Footer />
+      <CartProvider>
+        <Header />
+        {children}
+        <Footer />
+      </CartProvider>
     </StorefrontSettingsContext.Provider>
   );
 }

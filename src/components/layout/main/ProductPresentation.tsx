@@ -1,13 +1,10 @@
 "use client";
 
+import { ImagePlus } from "lucide-react";
 import { useStorefrontSettings } from "@/components/storefront/StorefrontProvider";
-
-const fallbackHeroImage =
-  "https://blog.sociedadedacarne.com.br/wp-content/uploads/2019/02/shutterstock_483310876.jpg";
 
 export default function ProductPresentation() {
   const settings = useStorefrontSettings();
-  const image = settings.heroImage || fallbackHeroImage;
 
   return (
     <>
@@ -47,11 +44,24 @@ export default function ProductPresentation() {
           </div>
 
           <div className="relative w-full max-w-md lg:max-w-lg">
-            <img
-              className="max-h-[32rem] w-full rounded-2xl object-cover"
-              src={image}
-              alt={settings.storeName}
-            />
+            {settings.heroImage ? (
+              <img
+                className="max-h-[32rem] w-full rounded-2xl object-cover"
+                src={settings.heroImage}
+                alt={settings.storeName}
+              />
+            ) : (
+              <div
+                className="flex h-80 flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed lg:h-[32rem]"
+                style={{
+                  borderColor: settings.accentColor,
+                  color: settings.backgroundColor,
+                }}
+              >
+                <ImagePlus size={40} aria-hidden="true" />
+                <span className="text-sm font-medium">Sua foto aqui</span>
+              </div>
+            )}
           </div>
         </div>
       </section>
